@@ -33,13 +33,16 @@ UserParameter=smartmonitor.family[*],sudo smartctl -i /dev/$1 | grep "Family" | 
 ```
 
 **Make sure zabbix can perform sudo.**
+
 Example:
+```
 cat /etc/sudoers.d/zabbix
 Defaults:zabbix !requiretty
 Defaults:zabbix !syslog
 
 zabbix ALL=(ALL) NOPASSWD: /usr/local/bin/smart_monitor.sh *
 zabbix ALL=(ALL) NOPASSWD: /usr/sbin/smartctl -i *
+```
 
 ### Zabbix Server side
 
