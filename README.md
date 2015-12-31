@@ -29,7 +29,7 @@ UserParameter=smartmonitor.health[*],sudo /usr/local/bin/smart_monitor.sh -d $1 
 UserParameter=smartmonitor.model[*],sudo smartctl -i /dev/$1 | grep "Device Model" | cut -f2 -d:
 UserParameter=smartmonitor.sn[*],sudo smartctl -i /dev/$1 | grep "Serial Number" | cut -f2 -d:
 UserParameter=smartmonitor.capacity[*],sudo smartctl -i /dev/$1 | grep "User Capacity" | cut -f2 -d:
-UserParameter=smartmonitor.family[*],sudo smartctl -i /dev/$1 | grep "Family" | cut -f2 -d:
+UserParameter=smartmonitor.family[*],sudo smartctl -i /dev/$1 | grep "Model Family" | cut -f2 -d:
 ```
 
 **Make sure zabbix can perform sudo.**
