@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# AUTHOR: Kevin Druelle 
+# AUTHOR: Kevin Druelle
 #
 # DATE: 2014-06-17
 
@@ -10,11 +10,15 @@ while getopts ":Dd:v:t" optname
 do
     case "$optname" in
     "D")
-        # Discovery 
-        disks=`ls -l /dev/sd* | awk '{print $NF}' | sed 's/[0-9]//g' | uniq`
+        # Discovery
+        if [ -z "$disks" ]; then
+            disks=`ls -l /dev/sd* | awk '{print $NF}' | sed 's/[0-9]//g' | uniq`
+        fi
         typeset -i nbLines
         typeset -i cntLines=0
-        nbLines=`ls -l /dev/sd* | awk '{print $NF}' | sed 's/[0-9]//g' | uniq | wc -l`
+        if [ -z "$nbLines" ]; then
+            nbLines=`ls -l /dev/sd* | awk '{print $NF}' | sed 's/[0-9]//g' | uniq | wc -l`
+        fi
         echo "{"
         echo "\"data\":["
         for disk in $disks
@@ -33,6 +37,8 @@ do
     "d")
         # Which device
         Device=$OPTARG
+        disks=`ls -l /dev/sd* | grep $OPTARG | awk '{print $NF}' | sed 's/[0-9]//g' | uniq`
+        nbLines=`ls -l /dev/sd* | grep $OPTARG | awk '{print $NF}' | sed 's/[0-9]//g' | uniq | wc -l`
     ;;
     "v")
         # Which value to get
